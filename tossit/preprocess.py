@@ -28,7 +28,7 @@ def haversine(lon1, lat1, lon2, lat2):
     r = 6371 # Radius of earth in kilometers. Use 3956 for miles
     return c * r
 
-def build_basic_geo_array():
+def get_basic_geo_array():
     '''
     Purpose:
         First pass representation of a set of points to model. For simplicity
@@ -43,13 +43,13 @@ def build_basic_geo_array():
         litter to toss. Finally the rider should be able to pass the destination
         of their ride.
     '''
-    return [
+    return np.array([
     [39.9571002,-75.1790366],
     [39.951666, -75.158866],
     [39.951900, -75.172815],
     [39.956850, -75.168941],
     [39.948919, -75.160389]
-    ]
+    ])
 
 def build_distance_matrix(geo_array:list):
     '''

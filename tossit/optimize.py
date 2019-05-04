@@ -39,7 +39,6 @@ def route(data:dict):
     # Create Routing Model.
     routing = pywrapcp.RoutingModel(manager)
 
-
     # Create and register a transit callback.
     def distance_callback(from_index, to_index):
         """Returns the distance between the two nodes."""

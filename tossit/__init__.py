@@ -1,6 +1,8 @@
 from . import optimize
 from . import postprocess
 from . import preprocess
+from os import path
+import webbrowser
 __version__ = 'v0.1'
 
 
@@ -59,13 +61,13 @@ class Main:
             'destination': destination
         }
 
-    def initialize_routes(self, model:dict):
+    def initialize_routes(self, data:dict):
         '''
         Purpose:
             Create the route.
 
         Args:
-            model: model dict that is processed in the following format:
+            data: model data dict that is processed in the following format:
             Example: {
             'distance_matrix': [[int], ...], all to all with index-based location
             identification
@@ -82,18 +84,40 @@ class Main:
             social media profile data.
         '''
         #model = preprocess.build_model_data() # TODO: expand on this
-        self.output = optimize.route(model)
+        self.model_data = data
+        self.output = optimize.route(data)
         #self.route = optimize.route_from_scratch(model)
 
-    def display_route(self):
+    def display_route(self, locations:list):
         '''
         Purpose:
             Get data about route for visualization and manage its display.
 
-        TODO:
-            Plotly? How and where is this visualized?
+        Args:
+            locations: list of location indexes. The function looks
+            at the model output and visualizes what is routed.
+
+        Credit:
+            Adam Votava (https://blog.alookanalytics.com/2017/02/05/how-to-plot-
+            your-own-bikejogging-route-using-python-and-google-maps-api/)
         '''
-        pass
+        # init map
+        loc_map = postprocess.Map()
+        # add coordinates
+        coordinates = preprocess.get_basic_geo_array()
+        coordinates = map(list(coordinates).__getitem__, locations)
+        for cs in coordinates:
+            loc_map.add_point(cs) # [lat, lon]
+
+        # save as html
+        thisdir = path.dirname(path.abspath(__file__))
+        targetdir = path.join(path.dirname(thisdir), 'html')
+        targetpath = path.join(targetdir, 'activity_map.html')
+        with open(targetpath, "w") as out:
+            print(loc_map, file=out)
+
+        # open in a web browser
+        webbrowser.open_new_tab(targetpath)
 
     def describe_route(self):
         '''
