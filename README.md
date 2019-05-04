@@ -47,6 +47,15 @@ anything, and that's their nature. You're more likely to get them involved by
 providing this alternative than changing their personality and such.
 
 #### Point-to-point optimization
+**UPDATE NOTE:** While this program is pickup and delivery oriented, in the sense that
+a rider is picked up and delivered, the way to model this problem is to solve
+it as a [CVRP](https://developers.google.com/optimization/routing/cvrp) with
+[penalties and dropping visits](https://developers.google.com/optimization/routing/penalties).
+Note that wherever the model is described as *pickups and deliveries*, that is
+incomplete and outdated in this software's documentation. The way to solve this
+is more likely a combination of a capacity problem, penalties, and pickups and
+deliveries.
+
 Google OR allows for you to program your custom VRP (vehicle routing problem)
 and apply it in whatever fashion you'd like. In this case I'll be engineering
 a [VRP with pickups and deliveries](https://developers.google.com/optimization/routing/pickup_delivery)

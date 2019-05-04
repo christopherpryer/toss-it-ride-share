@@ -36,7 +36,6 @@ def route(data:dict):
     # Create Routing Model.
     routing = pywrapcp.RoutingModel(manager)
 
-
     # Define cost of each arc.
     def distance_callback(from_index, to_index):
         """Returns the manhattan distance between the two nodes."""
@@ -59,6 +58,21 @@ def route(data:dict):
     distance_dimension = routing.GetDimensionOrDie(dimension_name)
     distance_dimension.SetGlobalSpanCostCoefficient(100)
 
+    def demand_callback(from_index):
+        """Returns the demand of the node."""
+        # Convert from routing variable Index to demands NodeIndex.
+        from_node = manager.IndexToNode(from_index)
+        return data['demands'][from_node]
+
+    demand_callback_index = routing.RegisterUnaryTransitCallback(
+        demand_callback)
+    routing.AddDimensionWithVehicleCapacity(
+        demand_callback_index,
+        0,  # null capacity slack
+        data['vehicle_capacities'],  # vehicle maximum capacities
+        True,  # start cumul to zero
+        'Capacity')
+
     # Define Transportation Requests.
     for request in data['pickups_deliveries']:
         pickup_index = manager.NodeToIndex(request[0])
@@ -80,10 +94,10 @@ def route(data:dict):
     assignment = routing.SolveWithParameters(search_parameters)
 
     return {
-    'data': data,
-    'manager': manager,
-    'routing': routing,
-    'assignment': assignment
+        'data': data,
+        'manager': manager,
+        'routing': routing,
+        'assignment': assignment
     }
 
 

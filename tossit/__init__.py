@@ -13,6 +13,15 @@ class Main:
         scope of this competition.
 
     Note:
+        WARNING: the problems to solve using this software are capacity related
+        with negative penalties and dropping visits. So pickups and deliveries
+        is not on its own the appropriate model. Through the rest of this code's
+        documentation, keep in mind that problems are modeled not as pickups and
+        deliveries but as a capacity problem with visit characteristics --
+        negative penalties for litter incentivization and score scaling and
+        dropping visits to allow for imperfect solutions (since this is not a
+        total demand satisfaction problem).
+
         To simplify the demo, this code will manage a problem from the
         perspective of a rider. A rider will request a ride and that route will
         be created using Google's Operations Research tools. To simulate the

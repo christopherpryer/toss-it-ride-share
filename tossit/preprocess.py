@@ -88,12 +88,14 @@ def build_model_data():
         that is identified as objectives prior to the arriving at D. After this
         is modeled, I'll expand on complexity. Ideally the solver should
         provide optimization for both the rider and the driver (i.e. from
-        a set of potential routes, which is best for me.)
+        a set of potential routes, which is best for me).
 
         Route: A -> B (litter 1) -> C (litter 2) -> D drop-off
     '''
     return {
-        'pickups_deliveries': [[1, 2], [2, 3], [3, 4]], # A->B->C->D
+        'demands': [0, 2, 2, 4, 0],
+        'vehicle_capacities': [10],
+        'pickups_deliveries': [[1, 4]], # A->B->C->D
         'distance_matrix': [
         [0, 10, 16, 21, 40],
         [10, 0, 6, 11, 30],
