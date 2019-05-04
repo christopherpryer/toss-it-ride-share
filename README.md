@@ -58,3 +58,26 @@ rider.
 Another cool functionality would be to created a ranking and scoring system for
 users. This could be built off of logic surrounding features such as litter
 tossed, ride-time, participation, use frequency, etc.
+
+## Using this software
+There are several phases identified for the program's development. In order to
+compete in Philly Codefest 2019 I'll need to tackle simplified sprints. In
+an order of simple to complex:
+
+A. Python Package: from the perspective of social network platforms, this
+software in its simplest form can be a package that developers can integrate
+with their users. Every social network platform can allow for their users to
+register with the software and its environment. Then each user can utilize the
+low-level capabilities and ranking system.
+A.1. Install the package and its dependancies.
+A.2. Integrate the main wrapper with your user models.
+A.3. Surface resulting data and visuals, along with this software's data
+models representing ranking and user analytics.
+
+B. Python Package and Website: A with public-facing website to house ranking,
+independent participation, etc.
+TODO:
+
+C. Stand alone software: Mobile web app used similarly to Uber and Lyft but
+as a social platform. The most advanced version of this software could provide
+monetary dimensions.  

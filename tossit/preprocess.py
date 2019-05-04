@@ -26,7 +26,9 @@ def build_model_data():
         'distance_matrix': [
         [0, 10, 16, 21, 40],
         [10, 0, 6, 11, 30],
-        [16, 4, 0, 5, 24]
+        [16, 4, 0, 5, 24],
+        [21, 11, 5, 0, 19],
+        [40, 30, 24, 19,0]
         ], # All-to-all distance (very simple *almost* straight-line route)
         'num_vehicles': 1, # demo (eventually should be predicated on proximity/availablilty)
         'depot': 0 # requires a return home (driver finishes where he or she started)

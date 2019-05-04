@@ -1,6 +1,6 @@
-import .optimize as optimize
-import .postprocess as postprocess
-import .preprocess as preprocess
+from . import optimize
+from . import postprocess
+from . import preprocess
 __version__ = 'v0.1'
 
 
@@ -33,7 +33,7 @@ class Main:
     def __init__(self):
         pass
 
-    def initialize_rider(self, name:str, pickup:li, destination:li):
+    def initialize_rider(self, name:str, pickup:list, destination:list):
         '''
         Purpose:
             Create the rider.
@@ -50,18 +50,31 @@ class Main:
             'destination': destination
         }
 
-    def initialize_route(self):
+    def initialize_routes(self, model:dict):
         '''
         Purpose:
             Create the route.
+
+        Args:
+            model: model dict that is processed in the following format:
+            Example: {
+            'distance_matrix': [[int], ...], all to all with index-based location
+            identification
+            'pickups_deliveries': [[int], ...], route segment pool to optimize within
+            'num_vehicles': int, must be generated in preprocessing module
+            functionality (proximity/availablilty derrived number to provide
+            potential routes)
+            'depot': 0 for initial development all drivers will return home.
+            }
         TODO:
             A. Simple, no arguments.
             B. Basic, maybe allow for proximity args.
             C. Advanced, allow for proximity args and 3rd-party peer-to-peer
             social media profile data.
         '''
-        model = preprocess.build_model_data() # TODO: expand on this
-        self.route = optimize.route(model)
+        #model = preprocess.build_model_data() # TODO: expand on this
+        self.routes = optimize.route(model)
+        #self.route = optimize.route_from_scratch(model)
 
     def display_route(self):
         '''
