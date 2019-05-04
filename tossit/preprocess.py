@@ -92,10 +92,10 @@ def build_model_data():
 
         Route: A -> B (litter 1) -> C (litter 2) -> D drop-off
     '''
-    return {
+    return { # rider is depot
         'demands': [0, 2, 2, 4, 0],
-        'vehicle_capacities': [10],
-        'pickups_deliveries': [[1, 4]], # A->B->C->D
+        'vehicle_capacities': [5],
+        #'pickups_deliveries': [[0, 4]],
         'distance_matrix': [
         [0, 10, 16, 21, 40],
         [10, 0, 6, 11, 30],
@@ -104,5 +104,7 @@ def build_model_data():
         [40, 30, 24, 19,0]
         ], # All-to-all distance (very simple *almost* straight-line route)
         'num_vehicles': 1, # demo (eventually should be predicated on proximity/availablilty)
-        'depot': 0 # requires a return home (driver finishes where he or she started)
+        #'depot': 0, # requires a return home (driver finishes where he or she started)
+        'starts': [0],
+        'ends': [4]
     }
