@@ -1,1 +1,22 @@
 - integrate with peer-to-peer social media platforms
+- integrate available philly data:
+  1. route restrictions:
+    -detours: https://www.opendataphilly.org/dataset/street-lane-closures
+    -path activity:
+      -https://www.opendataphilly.org/dataset/dvrpc-bicycle-counts
+      -https://www.opendataphilly.org/dataset/dvrpc-pedestrian-counts
+      -https://www.opendataphilly.org/dataset/dvrpc-traffic-counts
+    -path performance:
+      -https://www.opendataphilly.org/dataset/vehicular-crash-data
+      -https://www.opendataphilly.org/dataset/philadelphia-land-cover-raster
+      -https://www.opendataphilly.org/dataset/snow-emergency-routes
+    -other:
+      -https://www.opendataphilly.org/dataset/highway-districts
+      -https://www.opendataphilly.org/dataset/traffic-count-viewer
+  2. litter:
+    historical:
+      -https://www.opendataphilly.org/dataset/litter-index
+      -https://www.opendataphilly.org/dataset/archived-2015-litter-index
+  3. demographics and population identification:
+    -historical and forecasts:
+      -https://www.opendataphilly.org/dataset/dvrpc-demographic-and-employment-forecast-data-by-municipality-2010-to-2040
