@@ -1,17 +1,17 @@
 # toss-it-ride-share
 Ride share with like-minded anti-litter Philadelphians.
 
-## the idea
+## The Idea
 From the ground up this repo will be built around the VRP problem applied to
 pickup and deliveries, where pickups and deliveries are both fellow ride-share
 participants and identified public litter to be disposed.
 
-## the functions
+## The Functions
 1. geo-tagged pickups and deliveries.
 2. point to point route and litter clean up optimization.
 3. ranking system.
 
-## the vision
+## The Vision
 Ideally the functionality developed will be exposed to users through both mobile
 and browser-based interfaces. Geographic location functionality should be
 computed and managed under the hood. All the users should do is say they are
@@ -20,7 +20,7 @@ complete the objective of bringing both the driver (optional) and the rider to
 their respective destinations and rack up points by hitting either hotspots for
 litter or identified items to be disposed.
 
-# more detail
+## More Detail
 My goal is to learn how to use Google OR Tools. In the spirit of the competition
 and it's theme (see [philly codefest](https://2019-philly-codefest.devpost.com/)),
 this technology will be leveraged to initiate a *clean up program* to alleviate
