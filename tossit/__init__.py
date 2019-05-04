@@ -73,7 +73,7 @@ class Main:
             social media profile data.
         '''
         #model = preprocess.build_model_data() # TODO: expand on this
-        self.routes = optimize.route(model)
+        self.output = optimize.route(model)
         #self.route = optimize.route_from_scratch(model)
 
     def display_route(self):

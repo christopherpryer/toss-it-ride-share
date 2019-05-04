@@ -31,10 +31,20 @@ def test_routing():
     )
 
     # could externalize the modeling of the problem:
+    # TODO: use rider programmed data
+    locations = ts.preprocess.build_basic_geo_array()
     data = ts.preprocess.build_model_data()
+    data['distance_matrix'] = ts.preprocess.build_distance_matrix(locations)
     app.initialize_routes(data)
 
-    print('TESTING:>>Routes Created: ({})\n'.format(app.routes))
+    # Print solution on console.
+    print('TESTING:>>Routes Created:')
+    if app.output['assignment']:
+        ts.postprocess.print_solution(
+            app.output['data'],
+            app.output['manager'],
+            app.output['routing'],
+            app.output['assignment'])
 
 if __name__ == '__main__':
     test_rider()

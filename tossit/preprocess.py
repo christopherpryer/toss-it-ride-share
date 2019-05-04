@@ -2,7 +2,78 @@
 Purpose:
     Provide engines with preprocessing module to simplify data prep and
     configuration.
+
+Notes:
+    Distance calculation functionality can be done as part of this process or
+    it can also be externalized. Since the problem scope is limited to Philly
+    and/or mid-ranged proximity, haversine calculation will suffice in-app.
 '''
+from math import radians, cos, sin, asin, sqrt
+import numpy as np
+
+def haversine(lon1, lat1, lon2, lat2):
+    '''
+    Purpose:
+        Calculate the great circle distance between two points
+        on the earth.
+    '''
+    # convert decimal degrees to radians
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+
+    # haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a))
+    r = 6371 # Radius of earth in kilometers. Use 3956 for miles
+    return c * r
+
+def build_basic_geo_array():
+    '''
+    Purpose:
+        First pass representation of a set of points to model. For simplicity
+        I'll generate a list of coordinates that starts with one driver's
+        location, followed by the rider's pickup location, then a series of
+        litter locations, and finally the destination for the rider.
+
+    TODO:
+        This should scale to be generated after the *ideal* driver is processed.
+        In the simplest form the closest driver would be selected. It should
+        also accept *all* or at least a surplus of locations corresponding to
+        litter to toss. Finally the rider should be able to pass the destination
+        of their ride.
+    '''
+    return [
+    [39.9571002,-75.1790366],
+    [39.951666, -75.158866],
+    [39.951900, -75.172815],
+    [39.956850, -75.168941],
+    [39.948919, -75.160389]
+    ]
+
+def build_distance_matrix(geo_array:list):
+    '''
+    Purpose:
+        Take an array (or list) of geocodes [[lat, lon], ...] pre-ordered and
+        return a matrix of all to all distances using haversine calculations.
+        The order of the matrix corresponds to the order of the geo_array.
+
+    Args:
+        geo_array: list of lists representing location geocodes. Example:
+        [[float, float], ...]
+    '''
+    # simple nested loop to generate all to all
+    # TODO: may need to scale as app scales
+    distance_matrix = []
+    for location_a in geo_array:
+        tmp_matrix = [] # build all to all by-location
+        for location_b in geo_array:
+            tmp_matrix.append(
+                haversine(location_a[0], location_b[1], location_b[0], location_b[1])
+            )
+        distance_matrix.append(tmp_matrix)
+    return np.round(np.array(distance_matrix) * 1000, 0) # Google OR will convert to int
+
 def build_model_data():
     '''
     Purpose:

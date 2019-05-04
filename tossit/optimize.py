@@ -9,27 +9,6 @@ from __future__ import print_function
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 
-
-# Google OR-tools template function
-def print_solution(data, manager, routing, assignment):
-    """Prints assignment on console."""
-    total_distance = 0
-    for vehicle_id in range(data['num_vehicles']):
-        index = routing.Start(vehicle_id)
-        plan_output = 'Route for vehicle {}:\n'.format(vehicle_id)
-        route_distance = 0
-        while not routing.IsEnd(index):
-            plan_output += ' {} -> '.format(manager.IndexToNode(index))
-            previous_index = index
-            index = assignment.Value(routing.NextVar(index))
-            route_distance += routing.GetArcCostForVehicle(
-                previous_index, index, vehicle_id)
-        plan_output += '{}\n'.format(manager.IndexToNode(index))
-        plan_output += 'Distance of the route: {}m\n'.format(route_distance)
-        print(plan_output)
-        total_distance += route_distance
-    print('Total Distance of all routes: {}m'.format(total_distance))
-
 def route(data:dict):
     '''
     Purpose:
@@ -100,11 +79,12 @@ def route(data:dict):
     # Solve the problem.
     assignment = routing.SolveWithParameters(search_parameters)
 
-    # Print solution on console.
-    if assignment:
-        print_solution(data, manager, routing, assignment)
-
-    return None # TODO: define and return object for program utilization.
+    return {
+    'data': data,
+    'manager': manager,
+    'routing': routing,
+    'assignment': assignment
+    }
 
 
 def route_from_scratch(data:dict):
