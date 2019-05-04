@@ -18,7 +18,9 @@ computed and managed under the hood. All the users should do is say they are
 looking for a driver or a ride. Once the ride is established the team will both
 complete the objective of bringing both the driver (optional) and the rider to
 their respective destinations and rack up points by hitting either hotspots for
-litter or identified items to be disposed.
+litter or identified items to be disposed. A more advanced direction for this
+software would be to integrate with various peer-to-peer social media platforms
+to allow for seamless participation.
 
 ## More Detail
 My goal is to learn how to use Google OR Tools. In the spirit of the competition
