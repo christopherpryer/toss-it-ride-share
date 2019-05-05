@@ -68,7 +68,7 @@ def build_distance_matrix(geo_array:list):
                 haversine(location_a[0], location_b[1], location_b[0], location_b[1])
             )
         distance_matrix.append(tmp_matrix)
-    return np.round(np.array(distance_matrix) * 1000, 0) # Google OR will convert to int
+    return np.round(np.array(distance_matrix) * 100, 0) # Google OR will convert to int
 
 def build_model_data(n:int):
     '''
@@ -101,7 +101,7 @@ def build_model_data(n:int):
                 np.array([0]),
                 axis=0),
             axis=0),
-        'vehicle_capacities': [12], # TODO: improve
+        'vehicle_capacities': [5], # TODO: improve
         #'pickups_deliveries': [[0, 4]],
         'distance_matrix': [
         [0, 10, 16, 21, 40],

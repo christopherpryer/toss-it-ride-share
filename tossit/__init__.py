@@ -108,7 +108,6 @@ class Main:
         # add coordinates
         coordinates = self.model_data['locations']
         coordinates = list(map(list(coordinates).__getitem__, locations))
-        #coordinates.append(self.rider['destination'])
         for cs in coordinates:
             loc_map.add_point(cs) # [lat, lon]
 
@@ -120,7 +119,7 @@ class Main:
             print(loc_map, file=out)
 
         # open in a web browser
-        webbrowser.open_new_tab(targetpath)
+        #webbrowser.open_new_tab(targetpath)
 
     def describe_route(self):
         '''
