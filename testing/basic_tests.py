@@ -43,7 +43,7 @@ def test_display(app):
             app.output['routing'].NextVar(prev_node_i)
         )
         locations.add(i)
-    app.display_route(list(locations))
+    app.display_route(sorted(list(locations)))
 
 
 

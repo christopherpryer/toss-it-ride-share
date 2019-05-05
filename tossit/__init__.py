@@ -108,7 +108,7 @@ class Main:
         # add coordinates
         coordinates = self.model_data['locations']
         coordinates = list(map(list(coordinates).__getitem__, locations))
-        coordinates.append(self.rider['destination'])
+        #coordinates.append(self.rider['destination'])
         for cs in coordinates:
             loc_map.add_point(cs) # [lat, lon]
 
