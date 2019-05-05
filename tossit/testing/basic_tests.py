@@ -1,18 +1,19 @@
 import tossit as ts
 import numpy as np
 
-def get_route_indexes(app):
-    locations = set()
-    i = app.output['routing'].Start(0) # limited to first truck
-    locations.add(i)
-    while not app.output['routing'].IsEnd(i):
-        node_i = app.output['manager'].IndexToNode(i)
-        prev_node_i = node_i
-        i = app.output['assignment'].Value(
-            app.output['routing'].NextVar(prev_node_i)
-        )
+def get_ouput_sequence_sets(app):
+    location_sets = []
+    for vehicle in range(app.model_data['num_vehicles']):
+        locations = set()
+        i = app.output['routing'].Start(vehicle)
         locations.add(i)
-    return locations
+        while not app.output['routing'].IsEnd(i):
+            node_i = app.output['manager'].IndexToNode(i)
+            prev_node_i = node_i
+            i = app.output['assignment'].Value(app.output['routing'].NextVar(i))
+            locations.add(i)
+        location_sets.append(locations)
+    return location_sets
 
 def init_app():
     # psuedo route instruction params TODO: integrate
@@ -52,15 +53,16 @@ def test_routing(app):
             app.output['routing'],
             app.output['assignment'])
 
-    print('DEBUG:\norigin:\t\t{}'.format(app.model_data['locations'][0]))
+    print('\nDEBUG:\norigin:\t\t{}'.format(app.model_data['locations'][0]))
     print('destination:\t{}'.format(app.model_data['locations'][-1]))
-    indexes = get_route_indexes(app)
+    indexes = get_ouput_sequence_sets(app)[0] # use one?
+    print(sorted(indexes), len(app.model_data['demands']))
     demands = list(map(list(app.model_data['demands']).__getitem__, sorted(indexes)))
     print('points:\t\t{}'.format(demands))
     print('total pts:\t{}'.format(sum(demands)))
 
 def test_display(app):
-    locations = get_route_indexes(app)
+    locations = get_ouput_sequence_sets(app)[0] # use one
     app.display_route(sorted(list(locations)))
 
 

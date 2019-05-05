@@ -93,23 +93,24 @@ def build_model_data(n:int):
     Args:
         n: int of number of locations
     '''
+    num_vehicles = 1
     return { # rider is depot
         'demands': np.append(
             np.array([0]),
             np.append(
-                np.random.randint(low=1, high=10, size=n-2),
+                np.random.randint(low=1, high=2, size=n-2),
                 np.array([0]),
                 axis=0),
             axis=0),
-        'vehicle_capacities': [5], # TODO: improve
-        'distance_matrix': [
+        'vehicle_capacities': [5 for i in range(0, num_vehicles)], # TODO: improve
+        'distance_matrix': [ # basic simulated sequence (depricated)
         [0, 10, 16, 21, 40],
         [10, 0, 6, 11, 30],
         [16, 4, 0, 5, 24],
         [21, 11, 5, 0, 19],
         [40, 30, 24, 19,0]
         ], # All-to-all distance (very simple *almost* straight-line route)
-        'num_vehicles': 1, # demo (eventually should be predicated on proximity/availablilty)
-        'starts': [0],
-        'ends': [n-1]
+        'num_vehicles': num_vehicles, # demo (eventually should be predicated on proximity/availablilty)
+        'starts': [0 for i in range(0, num_vehicles)],
+        'ends': [n-1 for i in range(0, num_vehicles)]
     }

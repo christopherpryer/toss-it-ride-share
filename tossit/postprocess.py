@@ -6,19 +6,20 @@ TODO:
     Abstract into data models and pipelines.
 '''
 from __future__ import print_function
-import math
+import math, numpy as np
 
 # Google OR-tools template function
 def print_solution(data, manager, routing, assignment):
     """Prints assignment on console."""
     # Display dropped nodes.
-    dropped_nodes = 'Dropped nodes:'
+    dropped_nodes = []
+    dropped_nodes_msg = 'Total dropped nodes: {}'
     for node in range(routing.Size()):
         if routing.IsStart(node) or routing.IsEnd(node):
             continue
         if assignment.Value(routing.NextVar(node)) == node:
-            dropped_nodes += ' {}'.format(manager.IndexToNode(node))
-    print(dropped_nodes)
+            dropped_nodes.append(manager.IndexToNode(node))
+    print(dropped_nodes_msg.format(len(dropped_nodes)))
     # Display routes
     total_distance = 0
     total_load = 0

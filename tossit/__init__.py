@@ -4,7 +4,7 @@ from . import preprocess
 from os import path
 import numpy as np
 import webbrowser
-__version__ = 'v0.1'
+__version__ = 'v0.1.1'
 
 
 class Main:
