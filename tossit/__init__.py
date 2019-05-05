@@ -2,6 +2,7 @@ from . import optimize
 from . import postprocess
 from . import preprocess
 from os import path
+import numpy as np
 import webbrowser
 __version__ = 'v0.1'
 
@@ -103,16 +104,18 @@ class Main:
         '''
         # init map
         loc_map = postprocess.Map()
+
         # add coordinates
-        coordinates = preprocess.get_basic_geo_array()
-        coordinates = map(list(coordinates).__getitem__, locations)
+        coordinates = self.model_data['locations']
+        coordinates = list(map(list(coordinates).__getitem__, locations))
+        coordinates.append(self.rider['destination'])
         for cs in coordinates:
             loc_map.add_point(cs) # [lat, lon]
 
         # save as html
         thisdir = path.dirname(path.abspath(__file__))
         targetdir = path.join(path.dirname(thisdir), 'html')
-        targetpath = path.join(targetdir, 'activity_map.html')
+        targetpath = path.join(targetdir, 'route_map.html')
         with open(targetpath, "w") as out:
             print(loc_map, file=out)
 

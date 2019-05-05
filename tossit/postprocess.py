@@ -46,6 +46,16 @@ def print_solution(data, manager, routing, assignment):
     print('Total Load of all routes: {}'.format(total_load))
 
 class Map(object):
+    '''
+    Purpose:
+        First pass map visual from the ground up using Google Maps and
+        geocode smoothing.
+
+    Credit:
+        Adam Votava (https://blog.alookanalytics.com/2017/02/05/how-to-plot-
+        your-own-bikejogging-route-using-python-and-google-maps-api/)
+        and subsequent stack overflow (etc.) developers.
+    '''
     def __init__(self):
         self._points = []
 

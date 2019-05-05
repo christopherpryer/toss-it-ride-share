@@ -13,9 +13,12 @@ def test_routing(app):
     # could externalize the modeling of the problem:
     # TODO: use rider programmed data
     locations = ts.preprocess.get_basic_geo_array()
-    data = ts.preprocess.build_model_data()
+    locations = np.append(np.array([app.rider['origin']]), locations, axis=0)
+    locations = np.append(locations, np.array([app.rider['destination']]), axis=0)
+    data = ts.preprocess.build_model_data(len(locations))
     data['distance_matrix'] = ts.preprocess.build_distance_matrix(locations)
     app.initialize_routes(data)
+    app.model_data['locations'] = locations
 
     # Print solution on console.
     print('TESTING:>>Routes Created:')
@@ -25,6 +28,9 @@ def test_routing(app):
             app.output['manager'],
             app.output['routing'],
             app.output['assignment'])
+
+    print('origin:\t{}'.format(app.model_data['locations'][0]))
+    print('destination:\t{}'.format(app.model_data['locations'][-1]))
 
 def test_display(app):
     locations = set()
@@ -45,9 +51,9 @@ if __name__ == '__main__':
     app = ts.Main()
 
     # psuedo route instruction params TODO: integrate
-    pickup_location = np.array([39.9571002,-75.1790366])
+    pickup_location = np.array([39.961507, -75.175803])
     #travel_delta = np.array([0.40, 0.10]) # create arbitrary route destination
-    destination_location = np.array([39.948919, -75.160389])
+    destination_location = np.array([39.945727, -75.152058])
 
     # tests
     test_rider(app)

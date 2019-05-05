@@ -43,13 +43,9 @@ def get_basic_geo_array():
         litter to toss. Finally the rider should be able to pass the destination
         of their ride.
     '''
-    return np.array([
-    [39.9571002,-75.1790366],
-    [39.951666, -75.158866],
-    [39.951900, -75.172815],
-    [39.956850, -75.168941],
-    [39.948919, -75.160389]
-    ])
+    lats = np.random.uniform(low=39.94, high=39.96, size=(50,))
+    lons = np.random.uniform(low=-75.17, high=-75.14, size=(50,))
+    return np.array([np.array(pair) for pair in zip(lats, lons)])
 
 def build_distance_matrix(geo_array:list):
     '''
@@ -74,9 +70,11 @@ def build_distance_matrix(geo_array:list):
         distance_matrix.append(tmp_matrix)
     return np.round(np.array(distance_matrix) * 1000, 0) # Google OR will convert to int
 
-def build_model_data():
+def build_model_data(n:int):
     '''
     Purpose:
+        UPDATE: improved complexity.
+
         For the codefest I'll need to simplify a bunch of the fundamental
         aspects to this software in order to have a chance at demoing
         *anything*. To simplify the upront problem of having a set of data
@@ -91,10 +89,19 @@ def build_model_data():
         a set of potential routes, which is best for me).
 
         Route: A -> B (litter 1) -> C (litter 2) -> D drop-off
+
+    Args:
+        n: int of number of locations
     '''
     return { # rider is depot
-        'demands': [0, 2, 2, 4, 0],
-        'vehicle_capacities': [5],
+        'demands': np.append(
+            np.array([0]),
+            np.append(
+                np.random.randint(low=1, high=10, size=n-2),
+                np.array([0]),
+                axis=0),
+            axis=0),
+        'vehicle_capacities': [12], # TODO: improve
         #'pickups_deliveries': [[0, 4]],
         'distance_matrix': [
         [0, 10, 16, 21, 40],
@@ -106,5 +113,5 @@ def build_model_data():
         'num_vehicles': 1, # demo (eventually should be predicated on proximity/availablilty)
         #'depot': 0, # requires a return home (driver finishes where he or she started)
         'starts': [0],
-        'ends': [4]
+        'ends': [n-1]
     }
