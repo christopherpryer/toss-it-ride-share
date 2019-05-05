@@ -102,7 +102,6 @@ def build_model_data(n:int):
                 axis=0),
             axis=0),
         'vehicle_capacities': [5], # TODO: improve
-        #'pickups_deliveries': [[0, 4]],
         'distance_matrix': [
         [0, 10, 16, 21, 40],
         [10, 0, 6, 11, 30],
@@ -111,7 +110,6 @@ def build_model_data(n:int):
         [40, 30, 24, 19,0]
         ], # All-to-all distance (very simple *almost* straight-line route)
         'num_vehicles': 1, # demo (eventually should be predicated on proximity/availablilty)
-        #'depot': 0, # requires a return home (driver finishes where he or she started)
         'starts': [0],
         'ends': [n-1]
     }

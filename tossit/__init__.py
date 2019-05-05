@@ -84,10 +84,8 @@ class Main:
             C. Advanced, allow for proximity args and 3rd-party peer-to-peer
             social media profile data.
         '''
-        #model = preprocess.build_model_data() # TODO: expand on this
         self.model_data = data
         self.output = optimize.route(data)
-        #self.route = optimize.route_from_scratch(model)
 
     def display_route(self, locations:list):
         '''
@@ -119,7 +117,7 @@ class Main:
             print(loc_map, file=out)
 
         # open in a web browser
-        #webbrowser.open_new_tab(targetpath)
+        webbrowser.open_new_tab(targetpath)
 
     def describe_route(self):
         '''

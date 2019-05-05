@@ -17,7 +17,6 @@ def get_route_indexes(app):
 def init_app():
     # psuedo route instruction params TODO: integrate
     pickup_location = np.array([39.961507, -75.175803])
-    #travel_delta = np.array([0.40, 0.10]) # create arbitrary route destination
     destination_location = np.array([39.945727, -75.152058])
 
     # init
